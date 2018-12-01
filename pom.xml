@@ -8,6 +8,30 @@
     <artifactId>id</artifactId>
     <version>1.0.0</version>
 
+    <licenses>
+        <license>
+            <name>The Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>ziyuan</name>
+            <email>hanziyuan08@outlook.com</email>
+        </developer>
+    </developers>
+
+    <scm>
+        <url>https://github.com/Bpazy/Id</url>
+    </scm>
+
+    <parent>
+        <groupId>org.sonatype.oss</groupId>
+        <artifactId>oss-parent</artifactId>
+        <version>7</version>
+    </parent>
+
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
@@ -24,8 +48,9 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.18.4</version>
-            <scope>provide</scope>
+            <scope>provided</scope>
         </dependency>
+
     </dependencies>
 
     <build>
