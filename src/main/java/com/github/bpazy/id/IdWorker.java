@@ -9,34 +9,29 @@ import lombok.extern.slf4j.Slf4j;
 public class IdWorker {
 
     private long workerId;
-    private long datacenterId;
-    private long sequence;
+    private long sequence = 0; // 毫秒内序列，用来记录统一毫秒内生成的id，4095
     private long twepoch = 1288834974657L;
-    private long workerIdBits = 5L;
-    private long datacenterIdBits = 5L;
-    private long maxWorkerId = ~(-1L << workerIdBits);  // 计算workerIdBots位可以储存的最大正整数，这里及5位可以储存的最大正整数31
-    private long maxDatacenterId = ~(-1L << datacenterIdBits); // 同上，31
+    private long workerIdBits = 10L;
+    private long maxWorkerId = ~(-1L << workerIdBits);  // 计算workerIdBots位可以储存的最大正整数，这里及10位可以储存的最大正整数1023
     private long sequenceBits = 12L;
     private long workerIdShift = sequenceBits;
-    private long datacenterIdShift = sequenceBits + workerIdBits;
-    private long timestampLeftShift = sequenceBits + workerIdBits + datacenterIdBits;
+    private long timestampLeftShift = sequenceBits + workerIdBits;
     private long sequenceMask = ~(-1L << sequenceBits); // 同maxWorkerId的计算方法，4095
     private long lastTimestamp = -1L;
 
-    public IdWorker(long workerId, long datacenterId, long sequence) {
+    /**
+     *
+     * @param workerId, [0,1023]
+     */
+    public IdWorker(long workerId) {
         // sanity check for workerId
         if (workerId > maxWorkerId || workerId < 0) {
             throw new IllegalArgumentException(String.format("worker Id can't be greater than %d or less than 0", maxWorkerId));
         }
-        if (datacenterId > maxDatacenterId || datacenterId < 0) {
-            throw new IllegalArgumentException(String.format("datacenter Id can't be greater than %d or less than 0", maxDatacenterId));
-        }
-        log.warn("worker starting. timestamp left shift {}, datacenter id bits {}, worker id bits {}, sequence bits {}, workerid{}",
-                timestampLeftShift, datacenterIdBits, workerIdBits, sequenceBits, workerId);
+        log.warn("worker starting. timestamp left shift {}, worker id bits {}, sequence bits {}, workerid{}",
+                timestampLeftShift, workerIdBits, sequenceBits, workerId);
 
         this.workerId = workerId;
-        this.datacenterId = datacenterId;
-        this.sequence = sequence;
     }
 
     public synchronized long nextId() {
@@ -48,6 +43,7 @@ public class IdWorker {
                     lastTimestamp - timestamp));
         }
 
+        // 如果是同一时间生成的，则进行毫秒内序列
         if (lastTimestamp == timestamp) {
             sequence = (sequence + 1) & sequenceMask; // 通过位运算保证sequence的范围始终在[0, sequenceMask(4095)]
             if (sequence == 0) {
@@ -59,7 +55,6 @@ public class IdWorker {
 
         lastTimestamp = timestamp;
         return ((timestamp - twepoch) << timestampLeftShift) |
-                (datacenterId << datacenterIdShift) |
                 (workerId << workerIdShift) |
                 sequence;
     }
