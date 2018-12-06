@@ -28,7 +28,7 @@ public class IdWorker {
         if (workerId > maxWorkerId || workerId < 0) {
             throw new IllegalArgumentException(String.format("worker Id can't be greater than %d or less than 0", maxWorkerId));
         }
-        log.warn("worker starting. timestamp left shift {}, worker id bits {}, sequence bits {}, workerid{}",
+        log.warn("Id worker starting. timestamp left shift {}, worker id bits {}, sequence bits {}, worker id {}",
                 timestampLeftShift, workerIdBits, sequenceBits, workerId);
 
         this.workerId = workerId;
