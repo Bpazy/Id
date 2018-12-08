@@ -20,7 +20,6 @@ public class IdWorker {
     private long lastTimestamp = -1L;
 
     /**
-     *
      * @param workerId, [0,1023]
      */
     public IdWorker(long workerId) {
