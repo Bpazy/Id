@@ -1,8 +1,8 @@
 package com.github.bpazy.id;
 
 import lombok.extern.slf4j.Slf4j;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -22,6 +22,6 @@ public class IdTest {
             ids.add(String.valueOf(Id.next()));
         }
 
-        Assert.assertEquals("Generate id failed in 1 millisecond", MAX_TIMES, ids.size());
+        Assertions.assertEquals(MAX_TIMES, ids.size(), "Generate id failed in 1 millisecond");
     }
 }
