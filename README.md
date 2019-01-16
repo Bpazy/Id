@@ -1,5 +1,7 @@
 # Id
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.bpazy/id/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.bpazy/id)
+![Maven](https://img.shields.io/maven-central/v/com.github.bpazy/id.svg)
+[![Build Status](https://travis-ci.com/Bpazy/Id.svg?branch=master)](https://travis-ci.com/Bpazy/Id)
+[![codecov](https://codecov.io/gh/Bpazy/Id/branch/master/graph/badge.svg)](https://codecov.io/gh/Bpazy/Id)
 
 分布式id生成，整体随时间递增。
 
