@@ -1,5 +1,7 @@
 package com.github.bpazy.id;
 
+import com.github.bpazy.id.workerid.IpWorkerIdAssigner;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -23,5 +25,17 @@ public class IdTest {
         }
 
         Assertions.assertEquals(MAX_TIMES, ids.size(), "Generate id failed in 1 millisecond");
+    }
+
+    @Test
+    public void testNext() {
+        Id.next();
+    }
+
+    @Test
+    @SneakyThrows
+    public void testSetAssigner() {
+        Class.forName("com.github.bpazy.id.IpWorkerIdAssigner2");
+        Id.next();
     }
 }
