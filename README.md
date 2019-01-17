@@ -8,6 +8,15 @@
 最大支持1024个节点，每个节点每毫秒生成ID上限为4096个。
 
 ## Usage
+Add maven denpendency:
+```xml
+<dependency>
+  <groupId>com.squareup</groupId>
+  <artifactId>javapoet</artifactId>
+  <version>1.11.1</version>
+</dependency>
+```
+And then go:
 ```java
 public class Main {
     public static void main(String[] args) {
