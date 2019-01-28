@@ -1,6 +1,5 @@
 package com.github.bpazy.id;
 
-import com.github.bpazy.id.workerid.IpWorkerIdAssigner;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
