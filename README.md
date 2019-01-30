@@ -11,9 +11,9 @@
 Add maven denpendency:
 ```xml
 <dependency>
-  <groupId>com.squareup</groupId>
-  <artifactId>javapoet</artifactId>
-  <version>1.11.1</version>
+    <groupId>com.github.bpazy</groupId>
+    <artifactId>id</artifactId>
+    <version>{version}</version>
 </dependency>
 ```
 And then go:
